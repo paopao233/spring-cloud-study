@@ -1,0 +1,9 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: eurekaserver # eureka的服务名称
+eureka:
+  client:
+    service-url: # 由于eureka自身也是一个微服务 所以要先注册自己 多个以逗号隔开
+      defaultZone: http://127.0.0.1:10086/eureka

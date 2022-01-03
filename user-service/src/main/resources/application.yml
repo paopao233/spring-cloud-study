@@ -1,8 +1,10 @@
 server:
   port: 8081
 spring:
+  application:
+    name: userservice # eureka服务的服务名称
   datasource:
-    url: jdbc:mysql://localhost:3306/cloud_user?useSSL=false
+    url: jdbc:mysql://localhost:3306/cloud?useSSL=false
     username: root
     password: parklot7788@
     driver-class-name: com.mysql.jdbc.Driver
@@ -15,3 +17,8 @@ logging:
     cn.itcast: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
+# 注册eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
