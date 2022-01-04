@@ -21,3 +21,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
+#更改ribbon的策略
+userservice:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 随机负载规则
+# 开启ribbon饥饿加载
+ribbon:
+  eager-load:
+    enabled: true #
+    clients: userservice #指定要开启哪个服务的 饥饿加载 如果是多个服务 要写成下面这样 代表数组
+#        - userservice
+#        - xxservice

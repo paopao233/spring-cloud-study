@@ -21,7 +21,7 @@ public class OrderService {
         Order order = orderMapper.findById(orderId);
         // 2. 利用restemplate发起http请求 获取用户的信息
         // 2.1 url路径
-        String url = "http://localhot:8081/user/" + orderId;
+        String url = "http://userservice:8081/user/" + order.getUserId(); //这里不能在直接写ip地址，要变更成eureka里面的服务名称
         // 2.2 发送http请求 将返回的json结果反序列化为user对象 然后加到订单的详情中
         User user = restTemplate.getForObject(url, User.class);
         order.setUser(user);
