@@ -4,10 +4,16 @@ spring:
   application:
     name: userservice # eureka服务的服务名称
   datasource:
-    url: jdbc:mysql://localhost:3306/cloud?useSSL=false
+    url: jdbc:mysql://localhost:3306/cloud?useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: parklot7788@
+    password: park^@^7788
     driver-class-name: com.mysql.jdbc.Driver
+#  由于已经在bootstrap配置了nacos的配置 所以这里不用配置
+#  cloud:
+#    nacos:
+#      server-addr: localhost:8848 # nacos服务地址
+#      discovery:
+#        cluster-name: HZ #集群名称
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
   configuration:
@@ -17,8 +23,8 @@ logging:
     cn.itcast: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
-# 注册eureka
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:10086/eureka
+# 注册eureka 有了nacos就不用eureka了
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka

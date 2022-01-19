@@ -4,10 +4,18 @@ spring:
   application:
     name: orderservice
   datasource:
-    url: jdbc:mysql://localhost:3306/cloud?useSSL=false
+    url: jdbc:mysql://localhost:3306/cloud?useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: parklot7788@
+    password: park^@^7788
     driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      server-addr: localhost:8848 # nacos的服务地址
+      discovery:
+        cluster-name: HZ # 集群名称 会优先找同个区域的其他服务
+#        ephemeral: false #是否临时实例，临时的掉线时会被直接去除掉 而非零时实例则一直等到服务重新上线
+#        namespace: 8b18c218-8d73-41e2-9943-161fdbc8fa52 #开发环境的名称空间 不同空间下是隔离的 这里填的是id
+
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
   configuration:
@@ -17,14 +25,15 @@ logging:
     cn.itcast: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:10086/eureka
+#eureka: 有了nacos就不用eureka了
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
 #更改ribbon的策略
 userservice:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 随机负载规则
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.NacosRule # nacos集群服务优先选择同一区域 属于随机轮询
 # 开启ribbon饥饿加载
 ribbon:
   eager-load:
