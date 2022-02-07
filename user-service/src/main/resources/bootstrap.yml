@@ -8,6 +8,6 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:80 # nacos服务地址8848是单例默认 80是启用nginx反向代理后的地址端口
+        server-addr: nacos:8848 # nacos服务地址8848是单例默认 80是启用nginx反向代理后的地址端口 部署的时候使用docker的服务名来访问：nacos
       config:
-        file-extension: yml # 文件后缀名 与nacos的对应
+        file-extension: yml # 文件后缀名 与nacos配置文件的后缀对应 也可以yaml

@@ -1,0 +1,10 @@
+# feign配置
+feign:
+  #  client:
+  #    config:
+  #      default: # 这里用default就是全局配置 如果是写服务名称就是针对某个微服务的请求 如userservice
+  #        loggerLevel: FULL # 日志的级别 包含全部
+  httpclient:
+    enabled: true # 支持httpClient的开关
+    max-connections: 200 # 最大连接数
+    max-connections-per-route: 50 # 单个路径的最大连接数

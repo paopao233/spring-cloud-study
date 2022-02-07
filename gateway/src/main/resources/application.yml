@@ -1,0 +1,40 @@
+#服务注册
+server:
+  port: 10010
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: nacos:8848 # nacos地址 nacos是docker服务名 不部署时得用这个
+    gateway:
+      routes: # 路由
+        - id: user-service #路由标识 必须唯一 是自定义的
+          uri: lb://userservice #路由的目标地址 可实现负载均衡
+  #        uri: http://127.0.0.1:8081 # 固定地址 不可以实现负载均衡
+          predicates: #断言 判断请求是否符合规则
+          - Path=/user/** #路径断言，判断路径是否以/user开头 是则符合 多个路径加英文逗号隔开
+#          fifters:
+#            - AddRequestHeader=Truth, lele is fucking handsome #逗号是等于的意思
+        - id: order-service
+          uri: lb://orderservice
+          predicates:
+            - Path=/order/**
+      default-filters:
+        - AddRequestHeader=Truth, lele is fucking handsome
+      globalcors:
+        add-to-simple-url-handler-mapping: true #解决options请求被拦截的问题
+        cors-configurations:
+          '[/**]': #拦截所有请求
+            allowedOrigins: #允许哪些网站的跨域请求
+              - "http://localhost:8090"
+              - "http://www.leyou.com"
+            allowedMethonds: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true #是否允许携带COOKIE
+            maxAge: 360000 # 这次跨域检测的有效期

@@ -4,7 +4,7 @@ spring:
   application:
     name: userservice # eureka服务的服务名称
   datasource:
-    url: jdbc:mysql://localhost:3306/cloud?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://mysql:3306/cloud?useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: park^@^7788
     driver-class-name: com.mysql.jdbc.Driver
